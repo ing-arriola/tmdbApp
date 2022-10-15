@@ -1,6 +1,7 @@
 import { ChangeEvent, MouseEvent, useState } from 'react';
 import styled from 'styled-components';
 import { InputText, Button } from '../features/ui';
+import { loginApi } from '../features/api/LoginApi';
 
 export const Login = () => {
   const [loginFormData, setloginFormData] = useState({
@@ -15,8 +16,17 @@ export const Login = () => {
     });
   };
 
-  const onFormSubmit = (event: MouseEvent<HTMLButtonElement>) => {
+  const onFormSubmit = async (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
+    if (loginFormData && loginFormData.password) {
+      const {
+        data: { token },
+      } = await loginApi.post('/login', {
+        email: loginFormData.email,
+        password: loginFormData.password,
+      });
+      console.log(token);
+    }
   };
 
   return (
