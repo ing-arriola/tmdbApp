@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, CSSProperties } from 'react';
 import styled from 'styled-components';
 
 interface InputProps {
@@ -7,6 +7,7 @@ interface InputProps {
   setValue: (event: ChangeEvent<HTMLInputElement>) => void;
   name: string;
   type: 'password' | 'text' | 'number' | 'email';
+  style?: CSSProperties;
 }
 
 export const InputText = ({
@@ -15,17 +16,17 @@ export const InputText = ({
   setValue,
   name,
   type,
+  style,
 }: InputProps) => {
   return (
-    <div>
-      <StyledInput
-        name={name}
-        placeholder={placeHolder}
-        value={value}
-        onChange={setValue}
-        type={type}
-      />
-    </div>
+    <StyledInput
+      name={name}
+      placeholder={placeHolder}
+      value={value}
+      onChange={setValue}
+      type={type}
+      style={style}
+    />
   );
 };
 
