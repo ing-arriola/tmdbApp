@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { PopularMoviesResult } from '../api/Apitypes';
+import { MovieResult } from '../api/Apitypes';
 import { imagesUrl } from '../api/LoginApi';
 
 export const MovieCard = ({
@@ -8,7 +8,8 @@ export const MovieCard = ({
   overview,
   release_date,
   vote_average,
-}: PopularMoviesResult) => {
+  id,
+}: MovieResult) => {
   return (
     <Card>
       <Image src={`${imagesUrl}${backdrop_path}`} alt={title} />
