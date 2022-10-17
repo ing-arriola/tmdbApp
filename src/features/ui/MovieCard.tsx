@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 import { MovieResult } from '../api/Apitypes';
-import { imagesUrl } from '../api/LoginApi';
+import { imagesUrl } from '../api/Api';
+
+interface MovieCardProps extends MovieResult {
+  onMovieClick: (id: number) => void;
+}
 
 export const MovieCard = ({
   title,
@@ -9,12 +13,21 @@ export const MovieCard = ({
   release_date,
   vote_average,
   id,
-}: MovieResult) => {
+  onMovieClick,
+}: MovieCardProps) => {
   return (
-    <Card>
-      <Image src={`${imagesUrl}${backdrop_path}`} alt={title} />
+    <Card onClick={() => onMovieClick(id)}>
+      <Image
+        src={`${imagesUrl}${backdrop_path}`}
+        alt={title}
+        onError={(e) => {
+          e.currentTarget.src = '../../assets/fallBackImage.png';
+        }}
+      />
+
       <h4>{title}</h4>
-      <p>{overview}</p>
+      <Overview>{overview}</Overview>
+      <p>Read More</p>
       <CardFooter>
         <p>{release_date}</p>
         <p>{vote_average * 10} %</p>
@@ -35,6 +48,24 @@ const Card = styled.article`
   h4 {
     margin: 0.5rem 0.2rem;
   }
+  :hover {
+    transform: scale(1.02);
+    transition: all 0.3s linear;
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.3);
+    background: linear-gradient(
+      to top,
+      rgba(204, 203, 203, 0.62) 0%,
+      rgba(71, 71, 71, 0.832) 100%
+    );
+    color: white;
+  }
+`;
+
+const Overview = styled.p`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0.3rem 2rem;
+  white-space: nowrap;
 `;
 
 const CardFooter = styled.div`
