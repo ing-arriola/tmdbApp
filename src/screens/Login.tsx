@@ -1,7 +1,7 @@
 import { ChangeEvent, MouseEvent, useState } from 'react';
 import styled from 'styled-components';
 import { InputText, Button } from '../features/ui';
-import { loginApi } from '../features/api/LoginApi';
+import { loginApi } from '../features/api/Api';
 
 export const Login = () => {
   const [loginFormData, setloginFormData] = useState({
