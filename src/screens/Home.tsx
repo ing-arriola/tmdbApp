@@ -2,12 +2,14 @@ import { useEffect, useState, MouseEvent } from 'react';
 import styled from 'styled-components';
 
 import { Movies, MovieResult } from '../features/api/Apitypes';
-import { moviesApi } from '../features/api/LoginApi';
+import { moviesApi } from '../features/api/Api';
 import { MovieCard, SearchBar } from '../features/ui/';
+import { useNavigate } from 'react-router-dom';
 export const Home = () => {
   const [popularMovies, setpopularMovies] = useState<MovieResult[]>([]);
   const [movieToSearch, setMovieToSearch] = useState<string>('');
   const [showWordSearched, setshowWordSearched] = useState(false);
+  const navigate = useNavigate();
 
   const getPopularMovies = async () => {
     try {
@@ -38,6 +40,10 @@ export const Home = () => {
     }
   };
 
+  const onClickMovie = (movieId: number) => {
+    navigate(`/${movieId}`);
+  };
+
   useEffect(() => {
     getPopularMovies();
   }, []);
@@ -52,7 +58,11 @@ export const Home = () => {
       {showWordSearched && <h2>{`You searched for: ${movieToSearch}`}</h2>}
       <MoviesContainer>
         {popularMovies.map((popularMovie) => (
-          <MovieCard key={popularMovie.id} {...popularMovie} />
+          <MovieCard
+            onMovieClick={() => onClickMovie(popularMovie.id)}
+            key={popularMovie.id}
+            {...popularMovie}
+          />
         ))}
       </MoviesContainer>
     </main>
@@ -62,5 +72,5 @@ export const Home = () => {
 const MoviesContainer = styled.section`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(20rem, 3fr));
-  gap: 8px;
+  gap: 1rem;
 `;
