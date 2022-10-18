@@ -25,14 +25,17 @@ export const Login = () => {
         email: loginFormData.email,
         password: loginFormData.password,
       });
+      localStorage.setItem('token', token);
       console.log(token);
     }
   };
 
   return (
     <Container>
-      <h2>Welcome</h2>
-      <h3>Please enter your information to continue</h3>
+      <TitleContainer>
+        <h2>Welcome</h2>
+        <h3>Please enter your information to continue</h3>
+      </TitleContainer>
       <StyledFormContainer>
         <InputText
           placeHolder="Enter your email"
@@ -63,10 +66,16 @@ const Container = styled.main`
   align-content: center;
 `;
 
+const TitleContainer = styled.div`
+  width: 100%;
+  text-align: center;
+  padding: 0 2.5rem;
+`;
+
 const StyledFormContainer = styled.form`
   display: grid;
   justify-content: center;
-  padding: 20px;
+  padding: 2.5rem;
   border-radius: 5px;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.5);
