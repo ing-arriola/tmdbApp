@@ -28,7 +28,7 @@ export const Login = () => {
         password: loginFormData.password,
       });
       localStorage.setItem('token', token);
-      navigate('/home');
+      navigate('/');
     }
   };
 
