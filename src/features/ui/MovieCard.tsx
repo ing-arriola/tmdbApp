@@ -17,13 +17,7 @@ export const MovieCard = ({
 }: MovieCardProps) => {
   return (
     <Card onClick={() => onMovieClick(id)}>
-      <Image
-        src={`${imagesUrl}${backdrop_path}`}
-        alt={title}
-        onError={(e) => {
-          e.currentTarget.src = '../../assets/fallBackImage.png';
-        }}
-      />
+      <Image src={`${imagesUrl}${backdrop_path}`} alt={title} />
 
       <h4>{title}</h4>
       <Overview>{overview}</Overview>
