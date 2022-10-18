@@ -2,12 +2,14 @@ import { ChangeEvent, MouseEvent, useState } from 'react';
 import styled from 'styled-components';
 import { InputText, Button } from '../features/ui';
 import { loginApi } from '../features/api/Api';
+import { useNavigate } from 'react-router-dom';
 
 export const Login = () => {
   const [loginFormData, setloginFormData] = useState({
     email: '',
     password: '',
   });
+  const navigate = useNavigate();
 
   const onFormDataChange = (event: ChangeEvent<HTMLInputElement>) => {
     setloginFormData({
@@ -26,7 +28,7 @@ export const Login = () => {
         password: loginFormData.password,
       });
       localStorage.setItem('token', token);
-      console.log(token);
+      navigate('/home');
     }
   };
 
