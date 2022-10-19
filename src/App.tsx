@@ -6,13 +6,14 @@ export const App = () => {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<Login />} />
         <Route element={<PrivateRoutes />}>
-          <Route path="/">
+          <Route path="/home">
             <Route index element={<Home />} />
-            <Route path=":movieId" element={<Details />} />
+            <Route path="/home/:movieId" element={<Details />} />
           </Route>
         </Route>
-        <Route path="/login" element={<Login />} />
+
         <Route path="*" element={<Notfound />} />
       </Routes>
     </BrowserRouter>

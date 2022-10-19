@@ -41,7 +41,7 @@ export const Home = () => {
   };
 
   const onClickMovie = (movieId: number) => {
-    navigate(`/${movieId}`);
+    navigate(`/home/${movieId}`);
   };
 
   useEffect(() => {
