@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { InputText, Button } from '../features/ui';
 import { loginApi } from '../features/api/Api';
 import { useNavigate } from 'react-router-dom';
+import { useAuthContext } from '../features/context/AuthContext';
 
 export const Login = () => {
   const [loginFormData, setloginFormData] = useState({
@@ -10,7 +11,7 @@ export const Login = () => {
     password: '',
   });
   const navigate = useNavigate();
-
+  const context = useAuthContext();
   const onFormDataChange = (event: ChangeEvent<HTMLInputElement>) => {
     setloginFormData({
       ...loginFormData,
@@ -27,7 +28,7 @@ export const Login = () => {
         email: loginFormData.email,
         password: loginFormData.password,
       });
-      localStorage.setItem('token', token);
+      context?.login(token);
       navigate('/home');
     }
   };
