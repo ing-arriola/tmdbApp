@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
+
 import { Credits, MovieDetails, Movies } from '../features/api/Apitypes';
 import { imagesUrl, moviesApi } from '../features/api/Api';
-import { Loading } from '../features/ui/Loading';
-import { MovieCard } from '../features/ui';
+import { Loading, Carrousel } from '../features/ui';
 
 export const Details = () => {
   const { movieId } = useParams();
@@ -51,30 +51,8 @@ export const Details = () => {
               <p>{cast.name}</p>
             ))}
           </GridContaier>
-          <h3>Related movies</h3>
-          <GridContaier>
-            {relatedMovies?.results.map((relatedMovie) => (
-              <MovieCard
-                title={relatedMovie.title}
-                backdrop_path={relatedMovie.backdrop_path}
-                overview={relatedMovie.overview}
-                release_date={relatedMovie.release_date}
-                onMovieClick={function (id: number): void {
-                  throw new Error('Function not implemented.');
-                }}
-                adult={relatedMovie.adult}
-                genre_ids={[]}
-                id={relatedMovie.id}
-                original_language={relatedMovie.original_language}
-                original_title={relatedMovie.original_title}
-                popularity={relatedMovie.popularity}
-                poster_path={relatedMovie.backdrop_path}
-                video={false}
-                vote_average={0}
-                vote_count={0}
-              />
-            ))}
-          </GridContaier>
+          <h2>Related movies</h2>
+          <Carrousel movies={relatedMovies?.results} />
         </div>
       ) : (
         <Loading />
